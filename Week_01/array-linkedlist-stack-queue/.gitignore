@@ -1,0 +1,41 @@
+# Vim tmp file
+.gitignore.swp
+
+# Python history
+*.pyc
+
+# Compiled class file
+*.class
+
+# Eclipse/idea project file
+.classpath
+.settings/
+.project
+.idea/
+.loadpath
+*.iml
+*.ipr
+*.iws
+.factorypath
+out/
+MANIFEST.MF
+
+# Log file
+*.log
+
+# Package Files #
+target/
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Maven Plugin xml
+.flattened-pom.xml
+dependency-reduced-pom.xml
+
+# OS generated files #
+**/.DS_Store
+*DS_Store
