@@ -4,7 +4,7 @@ import java.util.Stack;
 
 /**
  * @description: 接雨水
- * @author: aydenwang@tencent.com
+ * @author: aydenwang
  * @create: 2020-08-02 21:26
  * @version: 1.0.0
  **/

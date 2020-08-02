@@ -7,7 +7,6 @@ import java.util.Set;
 
 /**
  * @description: 两数之和
- * @author: aydenwang@tencent.com
  * @create: 2020-07-28 07:56
  * @version: 1.0.0
  **/

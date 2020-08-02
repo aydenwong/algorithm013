@@ -2,7 +2,7 @@ package code.ayden.algorithm.com.linkedlist.study;
 
 /**
  * @description: 反转链表
- * @author: aydenwang@tencent.com
+ * @author: aydenwang
  * @create: 2020-07-29 08:35
  * @version: 1.0.0
  **/

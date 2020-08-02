@@ -2,7 +2,7 @@ package code.ayden.algorithm.com.queue.practice;
 
 /**
  * @description: 队列
- * @author: aydenwang@tencent.com
+ * @author: aydenwang
  * @create: 2020-08-02 14:21
  * @version: 1.0.0
  **/

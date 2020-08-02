@@ -2,7 +2,6 @@ package code.ayden.algorithm.com.array.study;
 
 /**
  * @description: 爬楼梯问题
- * @author: aydenwang@tencent.com
  * @create: 2020-07-28 09:12
  * @version: 1.0.0
  **/

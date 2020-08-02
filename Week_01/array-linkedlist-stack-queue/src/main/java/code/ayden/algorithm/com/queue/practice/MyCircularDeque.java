@@ -4,7 +4,7 @@ package code.ayden.algorithm.com.queue.practice;
  * @description: 循环双端队列
  * 时间复杂度：O(1)。该数据结构中，所有方法都具有恒定的时间复杂度。
  * 空间复杂度：O(N)，其中 NN 是队列的预分配容量。循环队列的整个生命周期中，都持有该预分配的空间。
- * @author: aydenwang@tencent.com
+ * @author: aydenwang
  * @create: 2020-08-02 12:11
  * @version: 1.0.0
  **/
