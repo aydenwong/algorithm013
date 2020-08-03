@@ -45,6 +45,8 @@ public class Trap {
      * 动态规划，DP
      * 仍然是按列求，但是我们不需要每根柱子都算一遍左边和右边的最高柱子，可以缓存起来
      * 按照动态规划思想，每根柱子的左边最高，等于前一根的左边最高和前一根高度比；右边类似
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)，用来保存每一列左边最高的墙和右边最高的墙。
      *
      * @param height
      * @return
@@ -53,7 +55,7 @@ public class Trap {
         if (height.length == 0) {
             return 0;
         }
-        int[] leftMaxArr = new int[height.length-1];
+        int[] leftMaxArr = new int[height.length - 1];
         int[] rightMaxArr = new int[height.length];
         int sum = 0;
         //循环只需要从下标1开始，第一根柱子的左边没有柱子
@@ -79,36 +81,77 @@ public class Trap {
      * 动态规划，DP
      * 仍然是按列求，但是我们不需要每根柱子都算一遍左边和右边的最高柱子，可以缓存起来
      * 按照动态规划思想，每根柱子的左边最高，等于前一根的左边最高和前一根高度比；右边类似
-     *
+     * <p>
      * 优化，第三个循环是从左到右遍历，和第一个循环顺序一样，可以把第一个循环的代码放到第三个循环，减少一个循环
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)，用来保存每一列左边最高的墙和右边最高的墙。
      *
      * @param height
      * @return
      */
-    public int trapDpOpt1(int[] height) {
+    public int trapDpOpt(int[] height) {
         if (height.length == 0) {
             return 0;
         }
-        int[] leftMaxArr = new int[height.length-1];
         int[] rightMaxArr = new int[height.length];
         int sum = 0;
-        //循环只需要从下标1开始，第一根柱子的左边没有柱子
-        //同时，因为最后一根柱子不需要计算，所以循环到倒数第二根柱子就可以了
-        for (int i = 1; i < height.length - 1; i++) {
-            //注意：当i为0是，leftMaxArr[i - 1]即leftMaxArr[01的值为数组初始化的值0
-            leftMaxArr[i] = Math.max(leftMaxArr[i - 1], height[i - 1]);
-        }
+        int leftMax = 0;
+
         //循环从倒数第二根柱子开始，计算到第二根柱子
         for (int i = height.length - 2; i > 0; i--) {
             rightMaxArr[i] = Math.max(rightMaxArr[i + 1], height[i + 1]);
         }
         for (int i = 1; i < height.length - 1; i++) {
-            int min = Math.min(leftMaxArr[i], rightMaxArr[i]);
+            //leftMax只是用了一次，无需保存
+            leftMax = Math.max(leftMax, height[i - 1]);
+
+            int min = Math.min(leftMax, rightMaxArr[i]);
             if (min > height[i]) {
                 sum += (min - height[i]);
             }
         }
         return sum;
     }
+
+    /**
+     * 动态规划，DP，双指针
+     * 仍然是按列求，但是我们不需要每根柱子都算一遍左边和右边的最高柱子，可以缓存起来
+     * 按照动态规划思想，每根柱子的左边最高，等于前一根的左边最高和前一根高度比；右边类似
+     * <p>
+     * 优化，两个临时变量存储leftMax和rightMax，根据条件从左或者从右遍历
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)，用来保存每一列左边最高的墙和右边最高的墙。
+     *
+     * @param height
+     * @return
+     */
+    public int trapDpDoublePoint(int[] height) {
+        if (height.length < 3) {
+            return 0;
+        }
+        int sum = 0;
+        int rightMax = 0;
+        int leftMax = 0;
+        int left = 0;
+        int right = height.length - 1;
+        while (left <= right) {
+            if (leftMax <= rightMax) {
+                if (leftMax > height[left]) {
+                    sum += (leftMax - height[left]);
+                }
+                leftMax = Math.max(leftMax, height[left]);
+                left++;
+            } else {
+                if (rightMax > height[right]) {
+                    sum += (rightMax - height[right]);
+                }
+                rightMax = Math.max(rightMax, height[right]);
+                right--;
+            }
+        }
+        return sum;
+    }
+
+
 
 }
