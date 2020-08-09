@@ -1,5 +1,10 @@
 package code.ayden.algorithm.com.all.practice;
 
+import code.ayden.algorithm.com.stack.practice.ArrayStack;
+import com.sun.prism.impl.TextureResourcePool;
+
+import java.util.Stack;
+
 /**
  * @description: 接雨水
  * @author: aydenwang
@@ -119,8 +124,8 @@ public class Trap {
      * 按照动态规划思想，每根柱子的左边最高，等于前一根的左边最高和前一根高度比；右边类似
      * <p>
      * 优化，两个临时变量存储leftMax和rightMax，根据条件从左或者从右遍历
-     * 时间复杂度：O(n)
-     * 空间复杂度：O(n)，用来保存每一列左边最高的墙和右边最高的墙。
+     * 时间复杂度：O(n)，虽然是while循环，但是每个元素只被循环一次
+     * 空间复杂度：O(1)，不需要额外的数组
      *
      * @param height
      * @return
@@ -129,29 +134,58 @@ public class Trap {
         if (height.length < 3) {
             return 0;
         }
+        //总面积
         int sum = 0;
-        int rightMax = 0;
+        //左边最大
         int leftMax = 0;
+        //右边最大
+        int rightMax = 0;
+        //左边遍历下标，从0开始，因为要计算第一根柱子的高度
         int left = 0;
+        //右边遍历下标，从最后一个开始，因为要计算最后一根柱子高度
         int right = height.length - 1;
+        // 从左到右遍历的写法
         while (left <= right) {
             if (leftMax <= rightMax) {
+                //对于当前柱子来说，左边最高柱子最高是可信的，但是右边最高不一定，有可能有更高的柱子出现。所以当左边最高柱子高度小于右边柱子高度时，已经可以计算当前柱子能容纳的雨水容量了
                 if (leftMax > height[left]) {
                     sum += (leftMax - height[left]);
+                } else {
+                    leftMax = height[left];
                 }
-                leftMax = Math.max(leftMax, height[left]);
                 left++;
             } else {
                 if (rightMax > height[right]) {
                     sum += (rightMax - height[right]);
+                } else {
+                    rightMax = height[right];
                 }
-                rightMax = Math.max(rightMax, height[right]);
                 right--;
             }
         }
         return sum;
     }
 
+    public int trapStack(int[] height) {
+        Stack<Integer> stack = new Stack();
+        int sumArea = 0;
+        for (int current = 0; current < height.length; current++) {
+            while (!stack.isEmpty() && height[current] > height[stack.peek()]) {
+                int top1 = stack.pop();
+                if (stack.isEmpty()) {
+                    break;
+                }
+                int top2 = stack.peek();
+                int width = current - top2 - 1;
+
+                int high = Math.min(height[current], height[top2]) - height[top1];
+                int area = width * high;
+                sumArea += area;
+            }
+            stack.push(current);
+        }
+        return sumArea;
+    }
 
 
 }

@@ -17,7 +17,6 @@ public class ReverseList {
         // 节点本来没有引用上一个节点，需要一个节点保存前一个节点
         ListNode prev = null;
         ListNode curr = head;
-        //下一个节点不为空
         while (curr != null) {
             // 更改引用前，保存当前节点的下一个节点
             ListNode tempListNode = curr.next;
@@ -55,7 +54,7 @@ public class ReverseList {
         if (head == null || head.next == null) {
             return head;
         }
-        ListNode p = reverseList(head.next);
+        ListNode p = reverseListRecursion(head.next);
         head.next.next = head;
         head.next = null;
         return p;
