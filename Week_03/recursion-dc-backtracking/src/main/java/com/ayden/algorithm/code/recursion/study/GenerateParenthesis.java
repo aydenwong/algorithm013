@@ -19,9 +19,9 @@ public class GenerateParenthesis {
 
     public void generateAll(char[] current, int pos, List<String> result) {
         if (pos == current.length) {
-            //if (valid(current)) {
-            result.add(new String(current));
-            //}
+            if (valid(current)) {
+                result.add(new String(current));
+            }
             // System.out.println(current);
         } else {
             current[pos] = '(';
